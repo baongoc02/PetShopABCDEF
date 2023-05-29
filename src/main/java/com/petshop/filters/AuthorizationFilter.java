@@ -37,6 +37,7 @@ public class AuthorizationFilter extends HttpFilter implements Filter {
 			boolean isAuthenticated = false, isAdmin = false;
 			String userName = "";
 			for (Cookie cookie : cookies) {
+				cookie.setSecure(true);
 				if (cookie.getName().equals("login-id")) {
 					try {
 						int userId = Integer.parseInt(cookie.getValue());
