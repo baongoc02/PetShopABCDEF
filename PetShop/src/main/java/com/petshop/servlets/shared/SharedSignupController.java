@@ -44,6 +44,41 @@ public class SharedSignupController extends BaseSharedServlet {
 			return;
 		}
 		
+		if (password.length() > 20 || password.length() < 8)
+        {
+			request.setAttribute("error_messages", new String[] { "Password phải có độ dài từ 8 đến 20 ký tự." });
+			request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
+			return;
+        }
+        String upperCaseChars = "(.*[A-Z].*)";
+        if (!password.matches(upperCaseChars ))
+        {
+            request.setAttribute("error_messages", new String[] { "Password phải có ít nhất một ký tự in hoa" });
+            request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
+			return;
+        }
+        String lowerCaseChars = "(.*[a-z].*)";
+        if (!password.matches(lowerCaseChars ))
+        {
+            request.setAttribute("error_messages", new String[] { "Password phải có ít nhất một ký tự thường" });
+            request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
+			return;
+        }
+        String numbers = "(.*[0-9].*)";
+        if (!password.matches(numbers ))
+        {
+            request.setAttribute("error_messages", new String[] { "Password phải có ít nhất một ký tự số" });
+            request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
+			return;
+        }
+        String specialChars = "(.*[@,#,$,%,^,&,*].*$)";
+        if (!password.matches(specialChars ))
+        {
+            request.setAttribute("error_messages", new String[] { "Password phải có ít nhất một ký tự đặc biệt trong số @#$%^&*" });
+            request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
+			return;
+        }
+		
 		if (this.userDAO.checkUserExistedByPhoneNumber(phoneNumber)) {
 			request.setAttribute("error_messages", new String[] { "Số điện thoại này đã được sử dụng" });
 			request.getRequestDispatcher("/WEB-INF/templates/shared/signup.jsp").forward(request, response);
