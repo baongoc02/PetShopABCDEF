@@ -41,7 +41,9 @@ public class SharedLoginController extends BaseSharedServlet {
 		User user = this.userDAO.getUserByUsernameAndPassword(username, password);
 		
 		if (user != null) {
-			response.addCookie(new Cookie("login-id", Integer.toString(user.getId())));
+			Cookie cookie = new Cookie("login-id", Integer.toString(user.getId()));
+			cookie.setHttpOnly(true);
+			response.addCookie(cookie);
 			response.sendRedirect("/PetShop");
 		}
 		else {

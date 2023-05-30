@@ -36,7 +36,9 @@ public class AddProductToCart extends HttpServlet {
 		CartItemManager cartItemManaged = new CartItemManager(cartValue);
 		cartItemManaged.addProduct(productId);
 		
-		response.addCookie(new Cookie("CART", cartItemManaged.toCookieValue()));
+		Cookie cookie = new Cookie("CART", cartItemManaged.toCookieValue());
+		cookie.setHttpOnly(true);
+		response.addCookie(cookie);
 		
 		response.sendRedirect("/PetShop/gio-hang");
 	}
