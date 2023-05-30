@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
 import com.petshop.hibernate.HibernateUtils;
 import com.petshop.hibernate.daos.ProductDAO;
 import com.petshop.hibernate.entities.Product;
+import com.petshop.xss.XSSHelper;
 
 @WebServlet("/admin/product-management/update")
 public class AdminUpdateProductServlet extends HttpServlet {
@@ -39,6 +40,16 @@ public class AdminUpdateProductServlet extends HttpServlet {
 		String productCode = request.getParameter("productCode");
 		String productName = request.getParameter("productName");
 		int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+		
+		if (XSSHelper.checkStringContainXSS(productName)) {
+			response.sendRedirect("/PetShop/admin/product-management/edit?productId="+productId);
+			return;
+		}
+		
+		if (XSSHelper.checkStringContainXSS(productCode)) {
+			response.sendRedirect("/PetShop/admin/product-management/edit?productId="+productId);
+			return;
+		}
 
 		product.setId(productId);
 		product.setProductName(productName);
