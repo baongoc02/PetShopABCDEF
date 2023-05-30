@@ -38,6 +38,7 @@
           <!-- Main Content -->
           <div id="content">
             <c:import url="/WEB-INF/templates/admin/_layout/topbar.jsp" />
+            <c:import url="/WEB-INF/templates/shared/components/errorHandle.jsp"/>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">

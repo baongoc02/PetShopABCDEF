@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
 import com.petshop.hibernate.HibernateUtils;
 import com.petshop.hibernate.daos.ProductImageDAO;
 import com.petshop.hibernate.entities.ProductImage;
+import com.petshop.xss.XSSHelper;
 
 @WebServlet("/admin/productImage-management/update")
 public class AdminUpdateProductImageServlet extends HttpServlet {
@@ -47,6 +48,11 @@ public class AdminUpdateProductImageServlet extends HttpServlet {
 		
 		
 		productImage.setProductId(Integer.parseInt(request.getParameter("productId")));
+		
+		if (XSSHelper.checkStringContainXSS(productImage.getProductImageLink())) {
+			response.sendRedirect("/PetShop/admin/productImage-management?page=1&limit=50");
+			return;
+		}
 		
 		
 		
