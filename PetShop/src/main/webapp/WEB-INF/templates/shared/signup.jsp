@@ -29,7 +29,7 @@
                                 <input type="text" required class="form-control bg-light border-0 px-4" placeholder="Tên đầy đủ" style="height: 55px;" name="fullName">
                             </div>
                             <div class="col-12">
-                                <input type="password" required class="form-control bg-light border-0 px-4" placeholder="Mật khẩu" style="height: 55px;" name="password">
+                                <input type="password" autocomplete="off" required class="form-control bg-light border-0 px-4" placeholder="Mật khẩu" style="height: 55px;" name="password">
                             </div>
                             <div class="col-12">
                                 <input type="text" required class="form-control bg-light border-0 px-4" placeholder="Số điện thoại" style="height: 55px;" name="phoneNumber">
