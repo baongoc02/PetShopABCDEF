@@ -28,7 +28,7 @@
                                 <input type="text" class="form-control bg-light border-0 px-4" placeholder="Tên đăng nhập" style="height: 55px;" name="username">
                             </div>
                             <div class="col-12">
-                                <input type="password" class="form-control bg-light border-0 px-4" placeholder="Mật khẩu" style="height: 55px;" name="password">
+                                <input type="password" autocomplete="off" class="form-control bg-light border-0 px-4" placeholder="Mật khẩu" style="height: 55px;" name="password">
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Đăng nhập</button>
