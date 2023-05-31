@@ -18,10 +18,7 @@ public class ContentTypeFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.setHeader("X-Content-Type-Options", "nosniff");
-		
-			httpServletResponse.setHeader("Content-Security-Policy",
-					"script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com https://ajax.googleapis.com ");
-		
+					
 		
 		chain.doFilter(request, response);
 	}
