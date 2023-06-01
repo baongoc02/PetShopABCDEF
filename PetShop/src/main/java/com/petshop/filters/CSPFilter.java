@@ -21,7 +21,7 @@ public class CSPFilter implements Filter {
                     + "ajax.googleapis.com code.jquery.com cdn.jsdelivr.net 'unsafe-inline'; "
                     + "style-src 'self' *.googleapis.com cdn.jsdelivr.net 'unsafe-inline'; font-src 'self' data: *.googleapis.com "
                     + "cdn.jsdelivr.net "
-                    + "fonts.gstatic.com 'unsafe-inline'; frame-ancestors 'none'; worker-src 'self'; form-action 'self'; "
+                    + "fonts.gstatic.com 'unsafe-inline'; frame-ancestors 'self'; worker-src 'self'; "
                     + "img-src 'self' phukienpet.vn lorempixel.com 'unsafe-inline'");	
         }
 

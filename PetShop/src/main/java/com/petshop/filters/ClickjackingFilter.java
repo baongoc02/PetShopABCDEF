@@ -16,7 +16,7 @@ public class ClickjackingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
     		throws IOException, ServletException {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setHeader("X-Frame-Options", "DENY");
+        httpResponse.setHeader("X-Frame-Options", "SAMEORIGIN");
 
         chain.doFilter(request, response);
     }
