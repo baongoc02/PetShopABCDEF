@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.petshop.hibernate.daos.ProductDAO;
@@ -47,7 +48,18 @@ public class SharedCartController extends BaseSharedServlet {
 		for (CartItem cartItem : deletedCart) {
 			cartItemManaged.removeProduct(cartItem.getProductId());
 		}
-		response.addCookie(new Cookie("CART", cartItemManaged.toCookieValue()));
-		response.sendRedirect("/PetShop/thanh-toan");
+//		response.addCookie(new Cookie("CART", cartItemManaged.toCookieValue()));
+//		response.sendRedirect("/PetShop/thanh-toan");
+		
+		 // Mã hóa giá trị của cookie bằng Base64
+		Cookie cookie = new Cookie("CART", cartItemManaged.toCookieValue());
+		String encodedValue = Base64.getEncoder().encodeToString(cookie.getValue().getBytes());
+		// Thiết lập giá trị cho cookie đã được mã hóa
+        cookie.setValue(encodedValue);
+        System.out.print("encodedValue:"+ encodedValue);
+        // Thêm cookie vào phản hồi
+        response.addCookie(cookie);
+        response.sendRedirect("/PetShop/thanh-toan");
+		
 	}
 }

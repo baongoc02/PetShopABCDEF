@@ -1,6 +1,7 @@
 package com.petshop.servlets.shared;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import com.petshop.hibernate.daos.AnimalDAO;
@@ -41,11 +42,15 @@ public class BaseSharedServlet extends HttpServlet {
   
   protected CartItemManager getCartItemManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cartValue = "";
+		String decodedValue = null;
 		
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("CART")) {
-					cartValue = cookie.getValue(); 
+//					cartValue = cookie.getValue(); 
+////					Giải mã base64 giá trị cookie
+					decodedValue = new String(Base64.getDecoder().decode(cookie.getValue()));
+					cartValue = decodedValue;
 				}
 			}
 		}
@@ -92,11 +97,15 @@ public class BaseSharedServlet extends HttpServlet {
       
       //Cart
 		String cartValue = null;
+		String decodedValue = null;
 		
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("CART")) {
-					cartValue = cookie.getValue(); 
+//					cartValue = cookie.getValue(); 
+////					Giải mã base64 giá trị cookie
+					decodedValue = new String(Base64.getDecoder().decode(cookie.getValue()));
+					cartValue = decodedValue;
 				}
 			}
 		}
@@ -131,14 +140,17 @@ public class BaseSharedServlet extends HttpServlet {
         
         request.setAttribute("listAnimals", animals);
         request.setAttribute("listCategories", categories);
-        
+        String decodedValue = null;
         //Cart
 		String cartValue = null;
 		
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("CART")) {
-					cartValue = cookie.getValue(); 
+//					cartValue = cookie.getValue(); 
+//					Giải mã base64 giá trị cookie
+					decodedValue = new String(Base64.getDecoder().decode(cookie.getValue()));
+					cartValue = decodedValue;
 				}
 			}
 		}

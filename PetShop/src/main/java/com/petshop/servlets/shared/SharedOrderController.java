@@ -2,6 +2,7 @@ package com.petshop.servlets.shared;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.petshop.hibernate.daos.OrderDAO;
@@ -33,7 +34,7 @@ public class SharedOrderController extends BaseSharedServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doGet(request, response);
+		
 		
 		List<Order> orders = null;
 		List<OrderDetail> orderDetails = null;
@@ -60,18 +61,19 @@ public class SharedOrderController extends BaseSharedServlet {
 					total = orderDetail.getQuantity()*product.getPrice();
 					totalPrice = totalPrice + total;
 				}
-				if(totalPrice > 0) {
-					orderView.setTotalPrice(totalPrice);
-					orderViews.add(orderView);
-				}
+				orderView.setTotalPrice(totalPrice);
+				orderViews.add(orderView);
+//				orderView.setTotalPrice(totalPrice);
+//				orderViews.add(orderView);
 				
 			}
-			
 			request.setAttribute("listOrders", orderViews);
-			request.setAttribute("listProducts", products);
+			request.setAttribute("listProducts", products);	
 		}
-		
 		request.getRequestDispatcher("/WEB-INF/templates/shared/order.jsp").forward(request, response);
+		
+		super.doGet(request, response);
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

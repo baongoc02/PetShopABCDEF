@@ -1,6 +1,7 @@
 package com.petshop.servlets.shared.cart;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +29,13 @@ public class AddProductToCart extends HttpServlet {
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("CART")) {
-					cartValue = cookie.getValue(); 
+//					cartValue = cookie.getValue(); 
+					
+////					Trước khi thêm sp mới vào cart ta cần biết thông tin của các sp đang có trong cart,
+////					vì vậy ta cần giải mã chuỗi cookie để lấy giá trị
+//					// Giải mã giá trị của cookie bằng Base64
+                    String decodedValue = new String(Base64.getDecoder().decode(cookie.getValue()));
+                    cartValue = decodedValue;
 				}
 			}
 		}
@@ -36,9 +43,17 @@ public class AddProductToCart extends HttpServlet {
 		CartItemManager cartItemManaged = new CartItemManager(cartValue);
 		cartItemManaged.addProduct(productId);
 		
+//		Cookie cookie = new Cookie("CART", cartItemManaged.toCookieValue());
+//		cookie.setHttpOnly(true);
+//		response.addCookie(cookie);
+		
 		Cookie cookie = new Cookie("CART", cartItemManaged.toCookieValue());
-		cookie.setHttpOnly(true);
-		response.addCookie(cookie);
+		String encodedValue = Base64.getEncoder().encodeToString(cookie.getValue().getBytes());
+		// Thiết lập giá trị cho cookie đã được mã hóa
+        cookie.setValue(encodedValue);
+        cookie.setHttpOnly(true);
+        // Thêm cookie vào phản hồi
+        response.addCookie(cookie);
 		
 		response.sendRedirect("/PetShop/gio-hang");
 	}

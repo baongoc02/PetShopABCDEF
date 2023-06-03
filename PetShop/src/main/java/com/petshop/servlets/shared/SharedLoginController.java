@@ -43,7 +43,7 @@ public class SharedLoginController extends BaseSharedServlet {
 		if (user != null) {
 			Cookie cookie = new Cookie("login-id", Integer.toString(user.getId()));
 			cookie.setHttpOnly(true);
-			response.addCookie(cookie);
+			response.addCookie(cookie)	;
 			response.sendRedirect("/PetShop");
 		}
 		else {
