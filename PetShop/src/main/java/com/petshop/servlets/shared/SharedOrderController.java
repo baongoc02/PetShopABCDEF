@@ -60,8 +60,11 @@ public class SharedOrderController extends BaseSharedServlet {
 					total = orderDetail.getQuantity()*product.getPrice();
 					totalPrice = totalPrice + total;
 				}
-				orderView.setTotalPrice(totalPrice);
-				orderViews.add(orderView);
+				if(totalPrice > 0) {
+					orderView.setTotalPrice(totalPrice);
+					orderViews.add(orderView);
+				}
+				
 			}
 			
 			request.setAttribute("listOrders", orderViews);
