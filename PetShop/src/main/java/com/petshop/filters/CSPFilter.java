@@ -18,11 +18,12 @@ public class CSPFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if (httpResponse.getHeader("Content-Security-Policy") == null) {
             httpResponse.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' "
-                    + "ajax.googleapis.com code.jquery.com cdn.jsdelivr.net 'unsafe-inline'; "
-                    + "style-src 'self' *.googleapis.com cdn.jsdelivr.net 'unsafe-inline'; font-src 'self' data: *.googleapis.com "
+                    + "https://ajax.googleapis.com https://code.jquery.com https://cdn.jsdelivr.net js 'unsafe-inline'; "
+                    + "style-src 'self' *.googleapis.com cdn.jsdelivr.net css 'unsafe-inline'; font-src 'self' data: *.googleapis.com "
                     + "cdn.jsdelivr.net "
-                    + "fonts.gstatic.com 'unsafe-inline'; frame-ancestors 'self'; worker-src 'self'; "
-                    + "img-src 'self' phukienpet.vn lorempixel.com 'unsafe-inline'");	
+                    + "fonts.gstatic.com 'unsafe-inline'; frame-ancestors 'self'; form-action 'self'; "
+                    + "img-src 'self' phukienpet.vn lorempixel.com http://theartmad.com 'unsafe-inline';"
+                    + "frame-src 'self' https://www.google.com/");	
         }
 
         chain.doFilter(request, response);
