@@ -47,6 +47,35 @@
           return false;
         }
         
+        if (password.length < 8 || password.length > 20) {
+        	alert('Password phải có độ dài từ 8 đến 20 ký tự.');
+            return false;
+        }
+        
+        var lowerCaseLetters = /[a-z]/g;
+        if(!password.match(lowerCaseLetters)) {
+        	alert('Password phải có ít nhất một ký tự thường.');
+            return false;
+        }
+        
+        var upperCaseLetters = /[A-Z]/g;
+        if(!password.match(upperCaseLetters)) {
+        	alert('Password phải có ít nhất một ký tự in hoa.');
+            return false;
+        }
+        
+        var numbers = /[0-9]/g;
+        if(!password.match(numbers)) {
+        	alert('Password phải có ít nhất một ký tự số.');
+            return false;
+        }
+        
+        var specialChars = /[@,#,$,%,^,&,*]/g;
+        if (!password.match(specialChars )) {
+        	alert('Password phải có ít nhất một ký tự đặc biệt.');
+            return false;
+        }
+        	
         return true;
       }
     </script>
